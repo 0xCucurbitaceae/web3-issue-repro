@@ -34,10 +34,26 @@ export default function RootLayout({
           href="https://lock.nyc3.cdn.digitaloceanspaces.com/assets/3d/Loomlock_v6.glb"
         />
       </Head>
-      <body className={`font-sans text-text`}>
+      <body className={`font-sans text-text `}>
         <Web3Provider config={config}>
           <ConfigProvider>
-            <AntdRegistry>{children}</AntdRegistry>
+            <AntdRegistry>
+              <div className="min-h-screen flex flex-col">
+                <main className="grow">{children}</main>
+                <footer className="flex justify-center py-5">
+                  <a
+                    href="https://github.com/0xCucurbitaceae/web3-issue-repro"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <img
+                      src="https://img.shields.io/badge/-GitHub-%23121011?style=for-the-badge&logo=github&logoColor=white"
+                      alt="GitHub"
+                    />
+                  </a>
+                </footer>
+              </div>
+            </AntdRegistry>
           </ConfigProvider>
         </Web3Provider>
       </body>

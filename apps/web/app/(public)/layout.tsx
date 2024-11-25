@@ -4,11 +4,12 @@ import { Header } from "@/shared/components/Header"
 
 const PublicLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
-      <div style={{ minHeight: "100vh", padding: 0 }} className="bg-brand-dark">
-        <Header />
-        <main className="text-white">{children}</main>
-      </div>
+    <div
+      style={{ minHeight: "100vh", padding: 0 }}
+      className="bg-brand-dark flex flex-col grow"
+    >
+      <Header />
+      <main className="text-white grow">{children}</main>
     </div>
   )
 }
