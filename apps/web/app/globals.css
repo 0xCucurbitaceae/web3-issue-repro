@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+/* used for the WINNER and LOSER badges */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Protest+Riot&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+@layer base {
+  html {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--brand);
+    font-size: 20px;
+  }
+
+  html,
+  body {
+    min-height: 100vh;
+    max-width: 100vw;
+    background-color: var(--brand);
+    /* overflow-x: hidden; */
+  }
+
+  .hr {
+    @apply border-none rounded-full bg-[currentColor] h-1 mx-auto w-full;
+  }
+
+  .hr.sm {
+    height: 2px;
+  }
+
+  .hr.container {
+    transform: scaleX(.98);
+  }
+}
+
+:root {
+  --brand-dark: rgba(29, 41, 194, var(--tw-opacity, 1));
+  --brand: rgba(63, 73, 204, var(--tw-opacity, 1));
+  --brand-light-bg: rgb(135 142 229 / var(--tw-bg-opacity, 1));
+  --brand-ultralight: rgba(222, 226, 255, var(--tw-opacity, 1));
+  --brand-light: rgba(135, 142, 229, var(--tw-opacity, 1));
+  --yellow: rgba(252, 238, 33, var(--tw-opacity, 1));
+  --red: rgba(199, 63, 47, var(--tw-opacity, 1));
+}
+
+svg,
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+svg {
+  width: auto;
+}
+
+.ant-modal {
+  text-align: center;
+}
+
+.ant-modal-title {
+  @apply font-bold;
+}
+
+.blink {
+  animation: blink-animation 1s 2.2s steps(5, start) infinite;
+}
+
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+.bg-l {
+  background-image: url("https://lock.nyc3.cdn.digitaloceanspaces.com/assets/L-bl.webp"), url("https://lock.nyc3.cdn.digitaloceanspaces.com/assets/L-tr.webp");
+  background-repeat: no-repeat;
+  background-position: bottom left, top right;
+  background-size: auto var(--l-size, max(8rem, 25%));
+  padding: 3rem;
+  @apply p-8 lg:p-16;
+}
+
+@media (min-width: 640px) {
+  html {
+    --header-height: 65px;
+  }
+}
+
+.subcontainer {
+  max-width: 100%;
+  padding-left: .5rem;
+  padding-right: .5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 1280px) {
+  .subcontainer {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.wip {
+  background-image: url(https://lock.nyc3.cdn.digitaloceanspaces.com/assets/wip.webp);
+}
+
+.vs-grid {
+  grid-template-columns: 1fr 10rem 1fr;
+  grid-template-rows: auto 2rem auto;
+  grid-template-areas:
+    "left-character vs right-character"
+    "left-glove vs right-glove"
+    "left-avatar other right-avatar";
+}
+
+@media (max-width: 767px) {
+  .vs-grid {
+    grid-template-columns: calc(50vw) 0rem calc(50vw);
+  }
+
+  .right-char,
+  .left-char,
+  .right-glove,
+  .left-glove {}
+
+  .right-avatar {
+    align-self: end;
+  }
+}
+
+.vs {
+  grid-area: vs;
+}
+
+.left-char {
+  grid-area: left-character;
+  justify-self: end;
+  align-self: end;
+}
+
+.right-char {
+  grid-area: right-character;
+  align-self: end;
+}
+
+.left-glove {
+  grid-area: left-glove;
+}
+
+.right-glove {
+  grid-area: right-glove;
+}
+
+.left-avatar {
+  grid-area: left-avatar;
+  justify-self: center;
+}
+
+.right-avatar {
+  grid-area: right-avatar;
+  justify-self: center;
+}
+
+.embossed {
+  background-image: linear-gradient(to bottom, var(--brand-dark) 0, transparent 2rem, transparent calc(100% - 2rem), var(--brand-dark) 100%);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}

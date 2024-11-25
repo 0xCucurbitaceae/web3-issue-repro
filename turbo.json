@@ -1,0 +1,52 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalEnv": [
+    "NEXT_PUBLIC_RAINBOW_PROJECT_ID",
+    "NODE_ENV",
+    "S3_ACCESS_KEY_ID",
+    "S3_SECRET_ACCESS_KEY",
+    "S3_ENDPOINT",
+    "NEXT_PUBLIC_S3_BUCKET_NAME",
+    "NEXT_PUBLIC_S3_DIRECTORY",
+    "NEXT_PUBLIC_S3_ENDPOINT",
+    "AWS_REGION",
+    "MONGODB_URI",
+    "MONGODB_DATABASE",
+    "SECRET_COOKIE_PASSWORD",
+    "MOVER_ADDRESSES",
+    "BLESSNET_SCAN_API_KEY",
+    "ALCHEMY_API_KEY"
+  ],
+  "ui": "tui",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "lint": {},
+    "tsc": {},
+    "tsc:watch": {},
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["compile"]
+    },
+    "ui#build": {},
+    "compile": {
+      "outputs": ["./artifacts/**"]
+    },
+    "check-quality": {
+      "dependsOn": ["lint", "tsc"]
+    },
+    "blockchain#dev": {
+      "cache": false,
+      "persistent": true,
+      "env": ["HH", "ALCHEMY_API_KEY", "ETHERSCAN_API_KEY", "ADMIN_ADDRESSES"],
+      "dependsOn": ["compile"]
+    },
+    "blockchain#tsc": {
+      "dependsOn": ["compile"]
+    }
+  }
+}

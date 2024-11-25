@@ -1,0 +1,39 @@
+diff --git a/ArrngConsumer.sol b/ArrngConsumer.sol
+index 018d1facb1d7d5ee13b9bdf69952cdf5bc101ee3..2216bdd56d05cf514e5938e56e351cff988186a7 100644
+--- a/ArrngConsumer.sol
++++ b/ArrngConsumer.sol
+@@ -11,7 +11,7 @@
+ import {IArrngConsumer} from "./IArrngConsumer.sol";
+ import {IArrngController} from "./IArrngController.sol";
+ 
+-pragma solidity 0.8.19;
++pragma solidity 0.8.24;
+ 
+ abstract contract ArrngConsumer is IArrngConsumer {
+     IArrngController public immutable arrngController;
+diff --git a/IArrngConsumer.sol b/IArrngConsumer.sol
+index ad2e6e0406144fa394cb5212d0f756f6b228d028..67fe827f00f8640e3c5b4cee4ddae34a8bbd53f5 100644
+--- a/IArrngConsumer.sol
++++ b/IArrngConsumer.sol
+@@ -8,7 +8,7 @@
+  *
+  */
+ 
+-pragma solidity 0.8.19;
++pragma solidity 0.8.24;
+ 
+ interface IArrngConsumer {
+   /**
+diff --git a/IArrngController.sol b/IArrngController.sol
+index 64e279f06d9dba315fe162d998cc8c65023e3fc5..298054110232a072cb49cc320fa77b8cb49c8fc1 100644
+--- a/IArrngController.sol
++++ b/IArrngController.sol
+@@ -8,7 +8,7 @@
+  *
+  */
+ 
+-pragma solidity 0.8.19;
++pragma solidity 0.8.24;
+ 
+ interface IArrngController {
+   event ENSReverseRegistrarSet(address newENSReverseRegistrar);

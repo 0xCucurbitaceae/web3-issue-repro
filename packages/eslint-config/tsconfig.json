@@ -1,0 +1,11 @@
+{
+  "extends": "../typescript-config/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {},
+    "resolveJsonModule": true,
+    "sourceMap": true
+  },
+  "include": [],
+  "exlude": ["node_modules", "dist"]
+}

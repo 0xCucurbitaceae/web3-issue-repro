@@ -1,0 +1,71 @@
+# Assistant
+
+You are an expert in Typescript, React, Nextjs, Tailwindcss, Antd, Rainbowkit, Wagmi, Solidity, Hardhat, EthersJS, Yup, Formik.
+
+# Context
+
+The app is a monorepo app using turborepo
+It is composed of the following apps:
+
+- apps/web: the frontend application, powering users and admins. This is where anything specific to loomlock should be
+- apps/blockchain: the smart contracts for loomlock
+  Packages are as follow:
+- packages/ui: reusable components and utilities. Any code in there should be usable by any application, not only loomlock
+- packages/loomlock: code that is needed by both web and blockchain apps, such as utilities to interact with smart contracts, merkle tree helpers, etc
+
+# Rules
+
+- Use TypeScript for all code
+- Prefer iteration and modularization over code duplication
+- Use descriptive names for variables, functions, classes, etc(eg. `isLoading` instead of `loading`)
+- Use feature-based architecture(avoid splitting a feature into hooks, components, lib etc, unless the code must be shared across multiple features). This means stuff you for the `web` app should be placed under `apps/web/shared/MY_FEATURE`
+- NEVER, EVER remove any ts-ignore or eslint-disable-next-line comment.
+- when using composer, do not add comments that describe the code. Comments should only explain why a code exists, not what it does.
+- Do not remove comments unless i explicitely ask you to
+
+## React
+
+- Use react-query for data fetching
+- use app router for pages, and pages router for api routes
+- prefer Link to Button
+- prefer inlining component props to declaring a type, unless there are a lot of props
+- always give components an optional `className` prop and use `cn` from `@repo/ui/lib` when you need to programatically merge classNames
+
+## Form rules
+
+- use Formik and Yup for forms
+- use the inputs design system provided in @repo/ui/ui
+- use SmartField and SmartForm
+
+### Design rules
+
+- never use any of the Typography components from antd, prefer tailwind classes
+- never use antd's Layout, Row, Col, Spin. Prefer tailwind's grid classNames
+- use antd's `message.open`, not `message.info` or `message.error`
+- use formik's `isSubmitting` for the form's button's `loading` prop
+
+## Web3 rules
+
+- use wagmi wrappers found in @repo/ui/web3:
+  - useContractEvents for all event listeners or fetching
+  - useWriteContract for all writing to the blockchain
+  - useParsedContractReads for all reading from the blockchain
+- don't use deprecated wagmi hooks, only use wagmi 2's hooks
+
+## Solidity rules
+
+- always write or modify tests when changing solidity code
+- use loadFixture when writing tests
+- all arguments to functions should be suffixed with `_`
+- all named return values should be sufffixed with `_`
+- all private/internal functions should be prefixed with `_`
+- when moving in time, use the `fwd` and `goTo` functions from node-timer-helpers
+- consider you're using ethers 6, not 5
+- don't name test cases as "should allow to ...", instead use "allows to ..." (ie. don't use "should")
+- when you have multiple reverts, wrap them in a `context("reverts")` with each case named "when ..."
+
+## App specific rules
+
+- you can find loomlock contract addresses in `@repo/loomlock/config`
+- when you read a contract address, you should first get the chainId using useChainId, and then read the address from `config[String(chainId)].contracts.CONTRACT_NAME`
+- when importing @repo/loomlock from the blockchain app, do not use the subpaths exports, always the root import (eg. don't use `@repo/loomlock/utils`, import directly from `@repo/loomlock`)
