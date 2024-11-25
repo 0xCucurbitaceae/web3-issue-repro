@@ -1,10 +1,15 @@
 "use client"
-import { ConnectButton as RBConnectButton } from "@rainbow-me/rainbowkit"
+import {
+  ConnectButton as RBConnectButton,
+  useAccountModal,
+} from "@rainbow-me/rainbowkit"
 import { cn } from "@repo/ui/lib"
 import { Button, Menu } from "antd"
 import Link from "next/link"
+import { useAccount } from "wagmi"
 
 const ConnectButton = () => {
+  const { openAccountModal } = useAccountModal()
   return (
     <RBConnectButton.Custom>
       {({ account, openConnectModal, authenticationStatus, mounted }) => {
@@ -16,7 +21,7 @@ const ConnectButton = () => {
             </Button>
           )
         }
-        return <Link href="/test" />
+        return <Button onClick={openAccountModal}>connected</Button>
       }}
     </RBConnectButton.Custom>
   )
