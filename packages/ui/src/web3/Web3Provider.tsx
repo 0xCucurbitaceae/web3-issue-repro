@@ -65,7 +65,7 @@ export const Web3Provider = ({
     [config],
   )
   return (
-    <WagmiProvider config={finalConfig}>
+    <WagmiProvider reconnectOnMount config={finalConfig}>
       <QueryClientProvider client={queryClient}>
         {children}
         <ReactQueryDevtools initialIsOpen={false} />
