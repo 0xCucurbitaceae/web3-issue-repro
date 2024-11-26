@@ -18,7 +18,7 @@
     "@aws-sdk/s3-request-presigner": "^3.649.0",
     "@next/third-parties": "^15.0.2",
     "@radix-ui/react-collapsible": "^1.1.1",
-    "@rainbow-me/rainbowkit": "2.1.5",
+    "@rainbow-me/rainbowkit": "2.2.0",
     "@react-three/drei": "^9.114.6",
     "@react-three/fiber": "^8.17.8",
     "@sentry/nextjs": "^8",
@@ -50,7 +50,7 @@
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.169.0",
     "viem": "^2.21.1",
-    "wagmi": "2.12.7",
+    "wagmi": "2.13.0",
     "yup": "^1.4.0"
   },
   "devDependencies": {
