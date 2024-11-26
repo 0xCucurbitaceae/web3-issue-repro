@@ -4,7 +4,14 @@ import { useMemo } from "react"
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
-import { createConfig, http, WagmiProvider } from "wagmi"
+import {
+  cookieStorage,
+  cookieToInitialState,
+  createConfig,
+  createStorage,
+  http,
+  WagmiProvider,
+} from "wagmi"
 import { mainnet, sepolia } from "wagmi/chains"
 import { injected } from "wagmi/connectors"
 import { metaMask } from "wagmi/connectors"
@@ -41,9 +48,10 @@ const queryClient = new QueryClient({
 export const Web3Provider = ({
   children,
   config,
+  cookie,
 }: {
   children: React.ReactNode
-
+  cookie: any
   config: Omit<
     Parameters<typeof getDefaultConfig>[0],
     "projectId" | "chains"
@@ -60,12 +68,21 @@ export const Web3Provider = ({
           [mainnet.id]: http(),
           [sepolia.id]: http(),
         },
+        storage: createStorage({
+          storage: cookieStorage,
+        }),
         ...config,
       }),
     [config],
   )
+
+  const initialState = cookieToInitialState(finalConfig, cookie)
   return (
-    <WagmiProvider reconnectOnMount config={finalConfig}>
+    <WagmiProvider
+      reconnectOnMount
+      config={finalConfig}
+      initialState={initialState}
+    >
       <QueryClientProvider client={queryClient}>
         {children}
         <ReactQueryDevtools initialIsOpen={false} />
