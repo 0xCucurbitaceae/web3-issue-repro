@@ -35,7 +35,7 @@ export default function RootLayout({
         />
       </Head>
       <body className={`font-sans text-text `}>
-        <Web3Provider config={config} cookie={headers().get("cookie")}>
+        <Web3Provider config={config}>
           <ConfigProvider>
             <AntdRegistry>
               <div className="min-h-screen flex flex-col">
