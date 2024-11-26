@@ -59,7 +59,7 @@ export const Web3Provider = ({
     () =>
       getDefaultConfig({
         projectId: process.env.NEXT_PUBLIC_RAINBOW_PROJECT_ID as string,
-        ssr: true,
+        // ssr: true,
         ...config,
       }),
     [config],
