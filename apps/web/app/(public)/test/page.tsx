@@ -1,7 +1,6 @@
 import { cn } from "@repo/ui/lib"
 import React from "react"
 import { IsConnected } from "@/shared/IsConnected"
-import { Header } from "@/shared/components/Header"
 
 export default function TestPage() {
   return (

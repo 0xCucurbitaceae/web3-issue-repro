@@ -1,31 +1,9 @@
 "use client"
-import {
-  ConnectButton as RBConnectButton,
-  useAccountModal,
-} from "@rainbow-me/rainbowkit"
+
 import { cn } from "@repo/ui/lib"
 import { Button, Menu } from "antd"
 import Link from "next/link"
-import { useAccount } from "wagmi"
-
-const ConnectButton = () => {
-  const { openAccountModal } = useAccountModal()
-  return (
-    <RBConnectButton.Custom>
-      {({ account, openConnectModal, authenticationStatus, mounted }) => {
-        const ready = mounted && authenticationStatus !== "loading"
-        if (!account) {
-          return (
-            <Button loading={!ready} onClick={openConnectModal}>
-              connect
-            </Button>
-          )
-        }
-        return <Button onClick={openAccountModal}>connected</Button>
-      }}
-    </RBConnectButton.Custom>
-  )
-}
+import { useAccount, useDisconnect } from "wagmi"
 
 const menuItems = [
   { key: "/", label: "home", href: "/" },
@@ -33,6 +11,8 @@ const menuItems = [
   { key: "/test2", label: "test2", href: "/test2" },
 ]
 export const Header = ({ className }: { className?: string }) => {
+  const { disconnect } = useDisconnect()
+  const { isConnected } = useAccount()
   return (
     <header
       className={cn(
@@ -56,7 +36,9 @@ export const Header = ({ className }: { className?: string }) => {
             }))}
           />
         </div>
-        <ConnectButton />
+        <Button onClick={() => disconnect()} disabled={!isConnected}>
+          {isConnected ? "disconnect" : "not connected"}
+        </Button>
       </div>
     </header>
   )

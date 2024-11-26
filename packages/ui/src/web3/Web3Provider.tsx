@@ -1,16 +1,14 @@
 "use client"
 
 import { useMemo } from "react"
-import {
-  Chain as RainbowChains,
-  getDefaultConfig,
-  RainbowKitProvider,
-  Theme,
-} from "@rainbow-me/rainbowkit"
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
-import { WagmiProvider } from "wagmi"
-import { Chain } from "wagmi/chains"
+import { createConfig, http, WagmiProvider } from "wagmi"
+import { mainnet, sepolia } from "wagmi/chains"
+import { injected } from "wagmi/connectors"
+import { metaMask } from "wagmi/connectors"
+import { safe } from "wagmi/connectors"
 
 // @ts-ignore that we add a func to this prototype
 
@@ -42,7 +40,6 @@ const queryClient = new QueryClient({
  */
 export const Web3Provider = ({
   children,
-  theme,
   config,
 }: {
   children: React.ReactNode
@@ -51,15 +48,18 @@ export const Web3Provider = ({
     Parameters<typeof getDefaultConfig>[0],
     "projectId" | "chains"
   > & {
-    chains: [Chain | RainbowChains, ...(Chain | RainbowChains)[]]
+    chains: any
   }
-  theme?: Theme
 }): React.ReactElement => {
   const finalConfig = useMemo(
     () =>
-      getDefaultConfig({
-        projectId: process.env.NEXT_PUBLIC_RAINBOW_PROJECT_ID as string,
+      createConfig({
         ssr: true,
+        connectors: [injected(), metaMask(), safe()],
+        transports: {
+          [mainnet.id]: http(),
+          [sepolia.id]: http(),
+        },
         ...config,
       }),
     [config],
@@ -67,9 +67,7 @@ export const Web3Provider = ({
   return (
     <WagmiProvider config={finalConfig}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider coolMode={false} theme={theme}>
-          {children}
-        </RainbowKitProvider>
+        {children}
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </WagmiProvider>

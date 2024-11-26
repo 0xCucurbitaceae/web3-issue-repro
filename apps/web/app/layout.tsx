@@ -1,12 +1,12 @@
-import type { Metadata } from "next"
 import { hardhat, mainnet, sepolia } from "wagmi/chains"
 import { Web3Provider } from "@repo/ui/web3"
 import { AntdRegistry } from "@ant-design/nextjs-registry"
 import { ConfigProvider } from "antd"
-import "@rainbow-me/rainbowkit/styles.css"
+
 import "./globals.css"
 import "slick-carousel/slick/slick.css"
 import Head from "next/head"
+import { injected, metaMask, safe } from "wagmi/connectors"
 
 const chains = [
   process.env.NODE_ENV === "development" && hardhat,
@@ -17,7 +17,6 @@ const chains = [
   .flat() as any
 
 const config = {
-  appName: "loomlock",
   chains: chains as any,
 }
 
