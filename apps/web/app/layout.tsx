@@ -41,7 +41,7 @@ export default function RootLayout({
                 <main className="grow">{children}</main>
                 <footer className="flex justify-center py-5">
                   <a
-                    href="https://github.com/0xCucurbitaceae/web3-issue-repro"
+                    href={`https://github.com/0xCucurbitaceae/web3-issue-repro/pull/${VERCEL_GIT_PULL_REQUEST_ID}`}
                     target="_blank"
                     rel="noreferrer"
                   >
