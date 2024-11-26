@@ -14,7 +14,7 @@ import { Chain } from "wagmi/chains"
 import { cookieToInitialState } from "wagmi"
 
 // @ts-ignore that we add a func to this prototype
-// to avoid an error in saving bigints to localStorage
+
 // eslint-disable-next-line no-extend-native
 BigInt.prototype.toJSON = function toJSON() {
   return this.toString()
