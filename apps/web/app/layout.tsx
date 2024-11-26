@@ -7,7 +7,7 @@ import "@rainbow-me/rainbowkit/styles.css"
 import "./globals.css"
 import "slick-carousel/slick/slick.css"
 import Head from "next/head"
-
+import { headers } from "next/headers"
 const chains = [
   process.env.NODE_ENV === "development" && hardhat,
   ...[mainnet],
@@ -35,7 +35,7 @@ export default function RootLayout({
         />
       </Head>
       <body className={`font-sans text-text `}>
-        <Web3Provider config={config}>
+        <Web3Provider config={config} headers={headers().get("cookie")}>
           <ConfigProvider>
             <AntdRegistry>
               <div className="min-h-screen flex flex-col">

@@ -11,7 +11,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { cookieStorage, createStorage, WagmiProvider } from "wagmi"
 import { Chain } from "wagmi/chains"
-import { headers } from "next/headers"
 import { cookieToInitialState } from "wagmi"
 
 // @ts-ignore that we add a func to this prototype
@@ -46,9 +45,10 @@ export const Web3Provider = ({
   children,
   theme,
   config,
+  cookies,
 }: {
   children: React.ReactNode
-
+  cookies?: any
   config: Omit<
     Parameters<typeof getDefaultConfig>[0],
     "projectId" | "chains"
@@ -69,10 +69,7 @@ export const Web3Provider = ({
       }),
     [config],
   )
-  const initialState = cookieToInitialState(
-    finalConfig,
-    headers().get("cookie"),
-  )
+  const initialState = cookieToInitialState(finalConfig, cookies)
   return (
     <WagmiProvider config={finalConfig} initialState={initialState}>
       <QueryClientProvider client={queryClient}>
