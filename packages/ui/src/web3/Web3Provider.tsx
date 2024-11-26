@@ -9,8 +9,10 @@ import {
 } from "@rainbow-me/rainbowkit"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
-import { WagmiProvider } from "wagmi"
+import { cookieStorage, createStorage, WagmiProvider } from "wagmi"
 import { Chain } from "wagmi/chains"
+import { headers } from "next/headers"
+import { cookieToInitialState } from "wagmi"
 
 // @ts-ignore that we add a func to this prototype
 // to avoid an error in saving bigints to localStorage
@@ -60,12 +62,19 @@ export const Web3Provider = ({
       getDefaultConfig({
         projectId: process.env.NEXT_PUBLIC_RAINBOW_PROJECT_ID as string,
         ssr: true,
+        storage: createStorage({
+          storage: cookieStorage,
+        }),
         ...config,
       }),
     [config],
   )
+  const initialState = cookieToInitialState(
+    finalConfig,
+    headers().get("cookie"),
+  )
   return (
-    <WagmiProvider config={finalConfig}>
+    <WagmiProvider config={finalConfig} initialState={initialState}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider coolMode={false} theme={theme}>
           {children}
