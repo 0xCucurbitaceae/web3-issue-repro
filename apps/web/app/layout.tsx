@@ -7,6 +7,7 @@ import "./globals.css"
 import "slick-carousel/slick/slick.css"
 import Head from "next/head"
 import { injected, metaMask, safe } from "wagmi/connectors"
+import { headers } from "next/headers"
 
 const chains = [
   process.env.NODE_ENV === "development" && hardhat,
@@ -34,7 +35,7 @@ export default function RootLayout({
         />
       </Head>
       <body className={`font-sans text-text `}>
-        <Web3Provider config={config}>
+        <Web3Provider config={config} cookie={headers().get("cookie")}>
           <ConfigProvider>
             <AntdRegistry>
               <div className="min-h-screen flex flex-col">
